@@ -23,7 +23,7 @@
         <td><%= movie.id %></td>
         <td><%= movie.name %></td>
         <td><%= movie.year %></td>
-        <td><%= movie.is_showing %></td>
+        <td><%= movie.is_showing ? '上映中' : '上映終了' %></td>
         <td><%= movie.description %></td>
         <td><%= movie.image_url %></td>
         <td><%= movie.created_at %></td>
