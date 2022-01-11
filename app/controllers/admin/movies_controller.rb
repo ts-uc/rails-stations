@@ -39,6 +39,12 @@ class Admin::MoviesController < ApplicationController
   end
 
   def destroy
+    if @movie.destroy
+      redirect_to admin_movies_path, notice: "削除しました！"
+    else
+      flash.now[:danger] = "削除に失敗しました。"
+      render :edit
+    end
   end
 
   def movie_params
