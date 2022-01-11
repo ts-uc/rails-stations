@@ -1,4 +1,16 @@
 <h1>Movies</h1>
-<form>
-  <textarea></textarea>
-</form>
+<div class="ui segment">
+  <%= form_with scope: :movie, url: admin_movies_path do |form| %>
+
+  <div><%= form.label :映画タイトル %> <%= form.text_field :name %></div>
+
+  <div><%= form.label :公開年 %> <%= form.text_field :year %></div>
+
+  <div><%= form.label :上映中か %> <%= form.check_box :is_showing %></div>
+
+  <div><%= form.label :概要 %> <%= form.text_area :description %></div>
+
+  <div><%= form.label :画像URL %> <%= form.text_field :image_url %></div>
+
+  <%= form.submit %> <% end %>
+</div>

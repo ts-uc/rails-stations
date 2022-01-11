@@ -1,4 +1,6 @@
 class Admin::MoviesController < ApplicationController
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+
   def index
     @movies = Movie.all
   end
@@ -24,6 +26,16 @@ class Admin::MoviesController < ApplicationController
   end
 
   def update
+    if !@movie.present?
+      flash.now[:danger] = "編集元の映画は存在しません。"
+      render :index
+    end
+    if @movie.update(movie_params)
+      redirect_to admin_movies_path, notice: "編集しました！"
+    else
+      flash.now[:danger] = "編集に失敗しました。"
+      render :edit
+    end
   end
 
   def destroy
@@ -32,5 +44,9 @@ class Admin::MoviesController < ApplicationController
   def movie_params
     logger.debug(params)
     params.require(:movie).permit(:name, :year, :is_showing, :description, :image_url)
+  end
+
+  def set_movie
+    @movie = Movie.find(params[:id])
   end
 end
